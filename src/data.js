@@ -8,7 +8,6 @@ const connection = mysql.createConnection({
   database: process.env.DATABASE,
   user: process.env.USER,
   password: process.env.PASSWORD,
-  port: process.env.DB_PORT,
 });
 
 export const getConnection = async () => await connection;
