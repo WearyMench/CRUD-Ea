@@ -21,11 +21,17 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 app.get("/productos", async (req, res) => {
-  const conection = await getConnection();
-  const resultado = await conection.query(
-    "SELECT * FROM product.listarproducto"
-  );
-  res.json(resultado);
+  try {
+    const conection = await getConnection();
+    const resultado = await conection.query(
+      "SELECT * FROM product.listarproducto"
+    );
+    res.json(resultado);
+  } catch (error) {
+    res.json({
+      message: "Something goes wrong",
+    });
+  }
 });
 
 app.get("/productos/:id", async (req, res) => {
