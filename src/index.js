@@ -30,7 +30,7 @@ app.use(express.json());
 app.get("/productos", async (req, res) => {
   try {
     const conection = await getConnection();
-    const resultado = await conection.query("SELECT * FROM listarproducto");
+    const [resultado] = await conection.query("SELECT * FROM listarproducto");
     res.json(resultado);
   } catch (error) {
     console.log(error);
@@ -44,7 +44,7 @@ app.get("/productos/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     const conection = await getConnection();
-    const resultado = await conection.query(
+    const [resultado] = await conection.query(
       "SELECT * FROM listarproducto WHERE id = ?",
       [id]
     );
@@ -79,7 +79,7 @@ app.put("/productos/:id", async (req, res) => {
     const { nombre, precio, url_imagen } = req.body;
     const id = parseInt(req.params.id);
     const conection = await getConnection();
-    const response = await conection.query(
+    const [response] = await conection.query(
       "UPDATE listarproducto SET nombre = ?, precio = ?, url_imagen = ? WHERE id = ?",
       [nombre, precio, url_imagen, id]
     );
@@ -100,7 +100,7 @@ app.delete("/productos/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     const conection = await getConnection();
-    const response = await conection.query(
+    const [response] = await conection.query(
       "DELETE FROM listarproducto WHERE id = ?",
       [id]
     );

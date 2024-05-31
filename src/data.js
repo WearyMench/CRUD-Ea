@@ -1,4 +1,4 @@
-import mysql from "promise-mysql";
+import { createConnection } from "mysql2/promise";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -10,7 +10,7 @@ if (!HOST || !DBPORT || !DATABASE || !USER || !PASSWORD) {
 }
 export const getConnection = async () => {
   try {
-    const connection = await mysql.createConnection({
+    const connection = await createConnection({
       host: HOST,
       port: DBPORT,
       database: DATABASE,
